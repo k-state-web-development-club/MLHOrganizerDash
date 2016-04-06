@@ -14,9 +14,21 @@ dash = Flask(__name__, static_url_path='')
 url = ""
 data = []
 
+
 @dash.route('/')
 def index():
+    for row in data:
+      #store.storeUser(row)
+
     return render_template('index.html', data=data, hackathon_name=hackathon_name)
+
+@dash.route('/email')
+def email():
+    return render_template('email.html', data=data)
+
+@dash.route('/raw')
+def raw():
+    return render_template('raw.html', data=json.dumps(data, separators=(',',':')))
 
 @dash.route('/stats', strict_slashes=False)
 def stats():
